@@ -19,7 +19,6 @@ export function App(params) {
 
   const getCustomers = function () {
     log("in getCustomers()");
-    //setCustomers(getAll());
     getAll(setCustomers);
   };
 
@@ -59,7 +58,7 @@ export function App(params) {
       post(formObject);
     }
     if (mode === "Update") {
-      put(formObject.id, formObject);
+      put(formObject);
     }
     setFormObject(blankCustomer);
   };

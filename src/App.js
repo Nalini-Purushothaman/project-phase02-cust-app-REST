@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getAll, post, put, deleteById } from "./memdb.js";
 import "./App.css";
+import CustomerList from "./components/customerlist.js";
 
 function log(message) {
   console.log(message);
@@ -64,31 +65,12 @@ export function App(params) {
   return (
     <div>
       <div className="boxed">
-        <h4>Customer List</h4>
-        <table id="customer-list">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Pass</th>
-            </tr>
-          </thead>
-          <tbody>
-            {customers.map((item, index) => {
-              return (
-                <tr
-                  key={item.id}
-                  className={item.id === formObject.id ? "selected" : ""}
-                  onClick={() => handleListClick(item)}
-                >
-                  <td>{item.name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.password}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <h4>Customer List Components</h4>
+        <CustomerList
+          customers={customers}
+          setCustomers={setCustomers}
+          formObject={formObject}
+        />
       </div>
       <div className="boxed">
         <div>

@@ -19,8 +19,36 @@ const items = [
   },
 ];
 
-export function getAll() {
-  return items;
+// export function getAll() {
+//   return items;
+// }
+// export function getAll() {
+//   let myHeaders = new Headers({ "Content-Type": "application/json" });
+//   var myInit = { method: "GET", headers: myHeaders, mode: "cors" };
+//   let promise = fetch("/customers", myInit);
+//   return promise.then((response) => {
+//     return response.text();
+//   });
+// }
+const baseURL = "http://localhost:4000/customers";
+export async function getAll(setCustomers) {
+  const myInit = {
+    method: "GET",
+    mode: "cors",
+  };
+  const fetchData = async (url) => {
+    try {
+      const response = await fetch(url, myInit);
+      if (!response.ok) {
+        throw new Error(`Error fetching data: ${response.status}`);
+      }
+      const data = await response.json();
+      setCustomers(data);
+    } catch (error) {
+      alert(error);
+    }
+  };
+  fetchData(baseURL);
 }
 
 export function get(id) {
@@ -33,11 +61,18 @@ export function get(id) {
   return result;
 }
 
-export function deleteById(id) {
-  let arrayIndex = getArrayIndexForId(id);
-  if (arrayIndex >= 0 && arrayIndex < items.length) {
-    items.splice(arrayIndex, 1);
-  }
+export async function deleteById(id) {
+  let url = baseURL + "/" + id;
+  let myHeaders = new Headers({ "Content-Type": "application/json" });
+  const myInit = {
+    method: "DELETE",
+    headers: myHeaders,
+    mode: "cors",
+  };
+  let promise = fetch(url, myInit);
+  return promise.then((response) => {
+    return response.text();
+  });
 }
 
 export function post(item) {

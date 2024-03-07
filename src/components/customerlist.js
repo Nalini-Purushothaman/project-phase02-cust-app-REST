@@ -1,6 +1,8 @@
 import React from "react";
 
 export default function CustomerList(props) {
+  //console.log("customer list:", props);
+
   return (
     <div className="boxed">
       <h4>Customer List Components</h4>

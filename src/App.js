@@ -15,11 +15,12 @@ export function App(params) {
   let mode = formObject.id >= 0 ? "Update" : "Add";
   useEffect(() => {
     getCustomers();
-  }, []);
+  }, [formObject]);
 
   const getCustomers = function () {
     log("in getCustomers()");
-    setCustomers(getAll());
+    //setCustomers(getAll());
+    getAll(setCustomers);
   };
 
   const handleListClick = function (item) {
